@@ -28,16 +28,16 @@ module Mongoid
         end
 
         # Update the given counters by the value factor. It uses the
-        # atomic inc command.
+        # atomic $inc command.
         #
         # @example Add 5 to comments counter and remove 2 from likes
         # counter
         #
-        #   Post.reset_counters('50e0edd97c71c17ea9000001',
-        # :comments_count => 5, :likes_count => -2)
+        #   Post.update_counters('50e0edd97c71c17ea9000001',
+        #              :comments_count => 5, :likes_count => -2)
         #
-        # @param [ String ] The id of the object that will be reset.
-        # @param [ Hash ] One or more counter caches to reset
+        # @param [ String ] The id of the object to update.
+        # @param [ Hash ] Key = counter_cahe and Value = factor.
         #
         # @since 3.1.0
         def update_counters(id, counters)
