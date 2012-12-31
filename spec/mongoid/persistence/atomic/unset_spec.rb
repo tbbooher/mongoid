@@ -26,5 +26,38 @@ describe Mongoid::Persistence::Atomic::Unset do
         removed.should be_nil
       end
     end
+
+    context "when unsetting multiple fields" do
+
+      let(:person) do
+        Person.create(age: 100, score: 2)
+      end
+
+      let!(:removed) do
+        person.unset([:age, :score])
+      end
+
+      it "removes age field" do
+        person.age.should be_nil
+      end
+
+      it "removes score field" do
+        person.score.should be_nil
+      end
+
+      it "resets the age dirty attribute" do
+        person.changes["age"].should be_nil
+      end
+
+      it "resets the score dirty attribute" do
+        person.changes["score"].should be_nil
+      end
+
+      it "returns nil" do
+        removed.should be_nil
+      end
+    end
+
+
   end
 end

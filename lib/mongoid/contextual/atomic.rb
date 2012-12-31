@@ -166,13 +166,14 @@ module Mongoid
       # @example Unset the field on the matches.
       #   context.unset(:name)
       #
-      # @param [ String, Symbol ] field The name of the field.
+      # @param [ String, Symbol, Array ] fields The name of the fields.
       #
       # @return [ nil ] Nil.
       #
       # @since 3.0.0
-      def unset(field)
-        query.update_all("$unset" => { field => true })
+      def unset(*fields)
+        unset_hash = Hash[fields.collect {|f| [f, true]}]
+        query.update_all("$unset" => unset_hash)
       end
     end
   end
