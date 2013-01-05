@@ -34,7 +34,7 @@ describe Mongoid::Persistence::Atomic::Unset do
       end
 
       let!(:removed) do
-        person.unset([:age, :score])
+        person.unset(:age, :score)
       end
 
       it "removes age field" do

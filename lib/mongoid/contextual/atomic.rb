@@ -171,9 +171,9 @@ module Mongoid
       # @return [ nil ] Nil.
       #
       # @since 3.0.0
-      def unset(*fields)
-        unset_hash = Hash[fields.collect {|f| [f, true]}]
-        query.update_all("$unset" => unset_hash)
+      def unset(*args)
+        fields = args.__find_args__.collect { |f| [f, true] }
+        query.update_all("$unset" => Hash[fields])
       end
     end
   end

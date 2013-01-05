@@ -39,11 +39,10 @@ module Mongoid
             document.database_field_name(field.to_s)
           end
 
-          if @fields.length == 1
-            self.class.send(:define_method, :field) do
-              @fields.first
-            end
-          end
+          self.class.send(:define_method, :field) do
+            @fields.first
+          end if @fields.length == 1
+
         end
 
         # Get the atomic operation to perform.

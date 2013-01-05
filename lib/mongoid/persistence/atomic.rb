@@ -222,7 +222,9 @@ module Mongoid
       #
       # @since 2.1.0
       def unset(*args)
-        Unset.new(self, Array.wrap(args[0]), true, args[1]).persist
+        fields = args.__find_args__
+        options = fields[-1].is_a?(Hash) ? fields.delete_at(-1) : {}
+        Unset.new(self, fields, true, options).persist
       end
     end
   end
